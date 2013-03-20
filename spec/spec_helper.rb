@@ -1,0 +1,11 @@
+require 'faraday'
+require 'rspec'
+require 'json'
+require 'base64'
+require 'webmock/rspec'
+require 'oauth'
+require 'launchy'
+
+require 'tweet'
+require 'user'
+require '../env.rb'

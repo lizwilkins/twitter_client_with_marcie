@@ -1,0 +1,15 @@
+# require 'faraday'
+# require 'json'
+# require 'base64'
+
+require 'active_model'
+require 'rspec'
+# require 'shoulda-matchers'
+require 'webmock/rspec'
+require 'bundler'
+require 'oauth'
+require 'launchy'
+
+require './lib/tweet'
+require './lib/user'
+require './env'
