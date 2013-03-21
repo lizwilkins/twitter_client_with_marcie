@@ -4,7 +4,7 @@ class User
 
   def initialize
     @consumer = OAuth::Consumer.new(CONSUMER_KEY, CONSUMER_SECRET, :site => "https://api.twitter.com/")
-    @request_token = consumer.get_request_token(:oauth_callback => CALLBACK_URL)
+    @request_token = @consumer.get_request_token(:oauth_callback => CALLBACK_URL)
   end
 
   def authorize_url
@@ -14,9 +14,16 @@ class User
   def get_access_token(oauth_verifier)
     @access_token = @request_token.get_access_token(:oauth_verifier => oauth_verifier)
   end
+
+  # def add_friend(screen_name)
+  #     response = user.access_token.post("https://api.twitter.com/1.1/friendships/create.json?screen_name=#{screen_name}&follow=true")
+  # end
+
+  # def tweet(message)
+  #   access_token.post("https://api.twitter.com/1.1/statuses/update.json", {:status => message}
+  # end
+
 end
-
-
 
  # def self.create(options)
  #    post_response = Faraday.post do |request|
