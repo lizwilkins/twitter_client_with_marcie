@@ -31,8 +31,9 @@ def menu(user)
       puts message
       print "Send tweet (y/n):  "
       if gets.chomp == 'y'
+        # tweet = Tweet.new(:screen_name => user.screen_name, :text => message)
         tweet = user.tweet(message)
-        if tweet == true
+        if tweet != nil
           puts "Tweet posted."
         else
           puts "Tweet post failed. Sorry."
@@ -40,10 +41,10 @@ def menu(user)
         end
       else
       end
-    when 'f'
+    when 'v'
       puts "\nHere is your twitter feed:"
       tweets = user.twitter_feed
-      tweets.each {|tweet| puts "\n#{screen_name}  #{tweet.message}"}
+      tweets.each {|tweet| puts "\n#{tweet.screen_name}  #{tweet.text}"}
     when 'a'
       print "\nWho do you want to add:  "
       screen_name = gets.chomp

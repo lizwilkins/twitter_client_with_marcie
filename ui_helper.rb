@@ -8,4 +8,5 @@ require 'active_model'
 require 'bundler'
 
 require './lib/user'
+require './lib/tweet'
 require './env'

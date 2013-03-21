@@ -20,14 +20,14 @@ class User
   end
 
   def tweet(message)
-    response = access_token.post("https://api.twitter.com/1.1/statuses/update.json", {:status => message})
+    response = @access_token.post("https://api.twitter.com/1.1/statuses/update.json", {:status => message})
     response.code == "200"
   end
 
-  # def twitter_feed
-  #   timeline = access_token.get("https://api.twitter.com/1.1/statuses/home_timeline.json")
-  #   tweets = JSON.parse(timeline.body)
-  #   tweets.map {|tweet| Tweet.new(tweet['screen_name'], tweet['text'])}
-  # end
+  def twitter_feed
+    timeline = @access_token.get("https://api.twitter.com/1.1/statuses/home_timeline.json")
+    tweets = JSON.parse(timeline.body)
+    tweets.map {|tweet| Tweet.new(:screen_name => tweet['user']['screen_name'], :text => tweet['text'])}
+  end
 
 end
