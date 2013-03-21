@@ -8,16 +8,16 @@ class User
   end
 
   def authorize_url
-    Launchy.open @request_token.authorize_url(:oauth_callback => CALLBACK_URL)
+    @request_token.authorize_url(:oauth_callback => CALLBACK_URL)
   end
 
   def get_access_token(oauth_verifier)
     @access_token = @request_token.get_access_token(:oauth_verifier => oauth_verifier)
   end
 
-  # def add_friend(screen_name)
-  #     response = user.access_token.post("https://api.twitter.com/1.1/friendships/create.json?screen_name=#{screen_name}&follow=true")
-  # end
+  def add_friend(screen_name)
+    response = @access_token.post("https://api.twitter.com/1.1/friendships/create.json?screen_name=#{screen_name}&follow=true")
+  end
 
   # def tweet(message)
   #   access_token.post("https://api.twitter.com/1.1/statuses/update.json", {:status => message}
