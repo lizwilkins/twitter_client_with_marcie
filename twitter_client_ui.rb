@@ -52,17 +52,17 @@ def menu(user)
       if tweep != nil
         puts "#{screen_name} has been added to your following."
       else
-        puts "#{handle} was not added due to..."
-        tweep.errors.each {|error| puts error.text}
+        puts "#{screen_name} was not added. Sorry."
+        # tweep.errors.each {|error| puts error.text}
       end
     when 'l'
       puts "\nHere are your current followers:"
-      followers = user.followers
-      followers.each {|follower| puts follower.screen_name}
+      followers = user.followed_by_list
+      followers.each {|follower| puts "\n#{follower.screen_name}"
     when 'u'
       puts "\nHere's who you are following:"
-      followers = user.follow
-      followers.each {|follower| puts follower.screen_name}
+      followers = user.following_list
+      followers.each {|follower| puts "\n#{follower.screen_name}"
     else
     end
   end

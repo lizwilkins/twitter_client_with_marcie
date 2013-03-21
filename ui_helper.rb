@@ -9,4 +9,5 @@ require 'bundler'
 
 require './lib/user'
 require './lib/tweet'
+require './lib/friend'
 require './env'

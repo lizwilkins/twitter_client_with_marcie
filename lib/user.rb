@@ -30,4 +30,15 @@ class User
     tweets.map {|tweet| Tweet.new(:screen_name => tweet['user']['screen_name'], :text => tweet['text'])}
   end
 
+  def following_list
+    puts "hi"
+    p followers = @access_token.get("https://api.twitter.com/1.1/followers/list.json?cursor=-1&screen_name=marciemo&skip_status=true&include_user_entities=false")
+    p friends = JSON.parse(followers.body)
+    friends.map {|friend| Friend.new(:screen_name => friend['users']['screen_name'])}
+  end
+
+  def followed_by_list
+
+  end
+
 end

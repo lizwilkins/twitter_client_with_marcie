@@ -11,4 +11,5 @@ require 'bundler'
 
 require 'user'
 require 'tweet'
+require 'friend'
 require './env'

@@ -97,4 +97,26 @@ describe User do
       user.twitter_feed.should eq [Tweet.new({:screen_name => 'twitterapi', :text => 'i made breakfast!'}), Tweet.new({:screen_name => 'michael', :text => 'epicodus is fun'})]
     end
   end
+
+  context 'following_list' do
+    it 'returns a list of friends who the current user is following' do
+      stub_request(:post, "https://api.twitter.com/oauth/request_token").
+        to_return(:body => "oauth_token=t&oauth_token_secret=s")    
+      user = User.new
+      stub_request(:post, "https://api.twitter.com/oauth/access_token").
+        to_return(:body => "oauth_token=at&oauth_token_secret=as&screen_name=sn")
+      user.get_access_token(23423432)
+      stub_request(:get, "https://api.twitter.com/1.1/followers/list.json?cursor=-1&include_user_entities=false&screen_name=marciemo&skip_status=true").
+         to_return(:status => 200, :body => "{\"users\":[{\"id\":499237034,\"id_str\":\"499237034\",\"name\":\"SAHABAT\",\"screen_name\":\"twitterapi\",\"location\":\"\",\"url\":null,\"description\":\"Contact management -  EYANG : 0878 - 7792 - 2666  @kerentpagustian \",\"protected\":false,\"followers_count\":486,\"friends_count\":20,\"listed_count\":0,\"created_at\":\"Tue Feb 21 22:38:49 +0000 2012\",\"favourites_count\":0,\"utc_offset\":28800,\"time_zone\":\"Beijing\",\"geo_enabled\":false,\"verified\":false,\"statuses_count\":13,\"lang\":\"en\",\"contributors_enabled\":false,\"is_translator\":false,\"profile_background_color\":\"F50AF5\",\"profile_background_image_url\":\"http:\\/\\/a0.twimg.com\\/profile_background_images\\/818313277\\/effa0c0a6419dcbde8182141791d7c46.jpeg\",\"profile_background_image_url_https\":\"https:\\/\\/si0.twimg.com\\/profile_background_images\\/818313277\\/effa0c0a6419dcbde8182141791d7c46.jpeg\",\"profile_background_tile\":true,\"profile_image_url\":\"http:\\/\\/a0.twimg.com\\/profile_images\\/3399038303\\/dd973ff9573aa081efc5229e139c41c8_normal.jpeg\",\"profile_image_url_https\":\"https:\\/\\/si0.twimg.com\\/profile_images\\/3399038303\\/dd973ff9573aa081efc5229e139c41c8_normal.jpeg\",\"profile_banner_url\":\"https:\\/\\/si0.twimg.com\\/profile_banners\\/499237034\\/1363661585\",\"profile_link_color\":\"FF0000\",\"profile_sidebar_border_color\":\"000000\",\"profile_sidebar_fill_color\":\"7AC3EE\",\"profile_text_color\":\"3D1957\",\"profile_use_background_image\":true,\"default_profile\":false,\"default_profile_image\":false,\"following\":false,\"follow_request_sent\":false,\"notifications\":false},{\"id\":25155303,\"id_str\":\"25155303\",\"name\":\"Bless\",\"screen_name\":\"michael\",\"location\":\"Cape Town\",\"url\":\"http:\\/\\/bit.ly\\/KT4fF9\",\"description\":\"Today is The Day!!!\",\"protected\":false,\"followers_count\":11971,\"friends_count\":10400,\"listed_count\":75,\"created_at\":\"Wed Mar 18 21:09:29 +0000 2009\",\"favourites_count\":989,\"utc_offset\":7200,\"time_zone\":\"Pretoria\",\"geo_enabled\":false,\"verified\":false,\"statuses_count\":112590,\"lang\":\"en\",\"contributors_enabled\":false,\"is_translator\":false,\"profile_background_color\":\"000000\",\"profile_background_image_url\":\"http:\\/\\/a0.twimg.com\\/profile_background_images\\/812712396\\/a26f9d46cff9a4ab187d723800d61cb7.jpeg\",\"profile_background_image_url_https\":\"https:\\/\\/si0.twimg.com\\/profile_background_images\\/812712396\\/a26f9d46cff9a4ab187d723800d61cb7.jpeg\",\"profile_background_tile\":true,\"profile_image_url\":\"http:\\/\\/a0.twimg.com\\/profile_images\\/3383333246\\/fe79f779d6cf3172bfc3bf465afd4140_normal.jpeg\",\"profile_image_url_https\":\"https:\\/\\/si0.twimg.com\\/profile_images\\/3383333246\\/fe79f779d6cf3172bfc3bf465afd4140_normal.jpeg\",\"profile_banner_url\":\"https:\\/\\/si0.twimg.com\\/profile_banners\\/25155303\\/1363072116\",\"profile_link_color\":\"B08D00\",\"profile_sidebar_border_color\":\"FFFFFF\",\"profile_sidebar_fill_color\":\"EFEFEF\",\"profile_text_color\":\"333333\",\"profile_use_background_image\":true,\"default_profile\":false,\"default_profile_image\":false,\"following\":false,\"follow_request_sent\":false,\"notifications\":false}],\"next_cursor\":1430104070717225887,\"next_cursor_str\":\"1430104070717225887\",\"previous_cursor\":0,\"previous_cursor_str\":\"0\"}")
+      user.following_list.should eq [Friend.new({:screen_name => 'twitterapi'}), Friend.new({:screen_name => 'michael'})]
+    end
+  end
+
 end
+
+
+
+
+
+
+
