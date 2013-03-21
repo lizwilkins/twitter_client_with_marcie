@@ -31,19 +31,19 @@ def menu(user)
       puts message
       print "Send tweet (y/n):  "
       if gets.chomp == 'y'
-        errors = user.tweet(message)
-        if errors == nil
+        tweet = user.tweet(message)
+        if tweet == true
           puts "Tweet posted."
         else
-          puts "Tweet post failed due to..."
-          errors.each {|error| puts error.text}
+          puts "Tweet post failed. Sorry."
+          # tweet.errors.each {|error| puts error.text}
         end
       else
       end
     when 'f'
       puts "\nHere is your twitter feed:"
       tweets = user.twitter_feed
-      tweets.each {|tweet| puts "\n#{twitter_handle}  #{tweet.message}"}
+      tweets.each {|tweet| puts "\n#{screen_name}  #{tweet.message}"}
     when 'a'
       print "\nWho do you want to add:  "
       screen_name = gets.chomp

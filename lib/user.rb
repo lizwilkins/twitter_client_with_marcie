@@ -19,18 +19,15 @@ class User
     response = @access_token.post("https://api.twitter.com/1.1/friendships/create.json?screen_name=#{screen_name}&follow=true")
   end
 
-  # def tweet(message)
-  #   access_token.post("https://api.twitter.com/1.1/statuses/update.json", {:status => message}
+  def tweet(message)
+    response = access_token.post("https://api.twitter.com/1.1/statuses/update.json", {:status => message})
+    response.code == "200"
+  end
+
+  # def twitter_feed
+  #   timeline = access_token.get("https://api.twitter.com/1.1/statuses/home_timeline.json")
+  #   tweets = JSON.parse(timeline.body)
+  #   tweets.map {|tweet| Tweet.new(tweet['screen_name'], tweet['text'])}
   # end
 
 end
-
- # def self.create(options)
- #    post_response = Faraday.post do |request|
- #      request.url 'https://api.github.com/gists'
- #      request.headers['Authorization'] = "Basic " + Base64.encode64("#{$github_username}:#{$github_password}")
- #      request.body = options.to_json
- #    end
- #  end
-
- #  http://api.twitter.com/1/account/verify_credentials.format

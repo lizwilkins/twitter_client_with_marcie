@@ -10,4 +10,5 @@ require 'shoulda-matchers'
 require 'bundler'
 
 require 'user'
+require 'tweet'
 require './env'

@@ -80,3 +80,13 @@
   #     # output['errors'].length.should be_nil
   #   end
   # end
+
+  # def self.create(options)
+ #    post_response = Faraday.post do |request|
+ #      request.url 'https://api.github.com/gists'
+ #      request.headers['Authorization'] = "Basic " + Base64.encode64("#{$github_username}:#{$github_password}")
+ #      request.body = options.to_json
+ #    end
+ #  end
+
+ #  http://api.twitter.com/1/account/verify_credentials.format
