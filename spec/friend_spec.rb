@@ -3,13 +3,13 @@ require 'spec_helper'
 describe Friend do
   context '#initialize' do
     it 'creates an instance of Friend' do
-      Friend.new({:screen_name => 'michael'}).should be_an_instance_of Friend
+      Friend.new(:screen_name => 'michael').should be_an_instance_of Friend
     end
   end
 
   context 'readers' do
     it 'returns the value of string_name' do
-      Friend.new({:screen_name => 'michael'}).screen_name.should eq 'michael'
+      Friend.new(:screen_name => 'michael').screen_name.should eq 'michael'
     end
   end
 

@@ -18,11 +18,15 @@ def login
 end 
 
 def menu(user)
-  puts "\nWhat would you like to do? Choose from the following options."
-  puts "'t' to post a tweet, 'v' to view your Twitter feed, 'a' to add a new follow, 'l' to list your followers, 'u' to list who you follow"
-  puts "'x' to exit"
   choice = nil
   until choice == 'x'
+    puts "\nWhat would you like to do? Choose from the following options."
+    puts "Enter 't' to post a tweet."
+    puts "Enter 'v' to view your Twitter feed."
+    puts "Enter 'a' to add a new follow."
+    puts "Enter 'l' to list your followers."
+    puts "Enter 'u' to list whom you follow."
+    puts "'x' to exit"
     case choice = gets.chomp
     when 't'
       print "\nCompose new tweet:  "
@@ -42,11 +46,11 @@ def menu(user)
       else
       end
     when 'v'
-      puts "\nHere is your twitter feed:"
+      puts "\nHere is your twitter feed:\n"
       tweets = user.twitter_feed
-      tweets.each {|tweet| puts "\n#{tweet.screen_name}  #{tweet.text}"}
+      tweets.each {|tweet| puts "#{tweet.screen_name}  #{tweet.text}"}
     when 'a'
-      print "\nWho do you want to add:  "
+      print "\nWhom do you want to add:  "
       screen_name = gets.chomp
       tweep = user.add_friend(screen_name)
       if tweep != nil
@@ -55,15 +59,14 @@ def menu(user)
         puts "#{screen_name} was not added. Sorry."
         # tweep.errors.each {|error| puts error.text}
       end
-    when 'l'
-      puts "\nHere are your current followers:"
-      followers = user.followed_by_list
-      followers.each {|follower| puts "\n#{follower.screen_name}"
     when 'u'
-      puts "\nHere's who you are following:"
+      puts "\nHere's whom you are following:\n"
       followers = user.following_list
-      followers.each {|follower| puts "\n#{follower.screen_name}"
-    else
+      followers.each {|follower| puts "#{follower.screen_name}"}
+    when 'l'
+      puts "\nHere are your current followers:\n"
+      followers = user.followed_by_list
+      followers.each {|follower| puts "#{follower.screen_name}"}
     end
   end
 end

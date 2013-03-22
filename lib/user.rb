@@ -31,14 +31,17 @@ class User
   end
 
   def following_list
-    puts "hi"
-    p followers = @access_token.get("https://api.twitter.com/1.1/followers/list.json?cursor=-1&screen_name=marciemo&skip_status=true&include_user_entities=false")
-    p friends = JSON.parse(followers.body)
-    friends.map {|friend| Friend.new(:screen_name => friend['users']['screen_name'])}
+    followers = @access_token.get("https://api.twitter.com/1.1/friends/list.json")
+    friends = JSON.parse(followers.body)
+    friends['users'].map {|friend| Friend.new(:screen_name => friend['screen_name'])}
   end
 
   def followed_by_list
-
+    followers = @access_token.get("https://api.twitter.com/1.1/followers/list.json")
+    friends = JSON.parse(followers.body)
+#    if friends['users'].length != 0
+      friends['users'].map {|friend| Friend.new(:screen_name => friend['screen_name'])}
+#    end
   end
 
 end
